@@ -257,5 +257,5 @@ app.post("/dictionary", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Listening at http://http://134.122.16.20:${port}`);
+  console.log(`Listening at http://134.122.16.20:${port}`);
 });
