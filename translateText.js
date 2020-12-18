@@ -27,7 +27,7 @@ const def = {
         name: "Yash Kanodia",
       },
     },
-    host: "134.122.16.20:" + port,
+    host: "localhost:" + port,
     basePath: "/",
   },
   apis: ["./translateText.js"],
@@ -80,9 +80,7 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(specs));
  *              $ref: '#/definitions/Translation'
  *
  */
-
 app.post("/translateText", (req, res) => {
-  console.log(req.params);
   axios
     .request({
       url: endpoint + "/translate",
@@ -150,9 +148,7 @@ app.post("/translateText", (req, res) => {
  *              $ref: '#/definitions/sentenceLength'
  *
  */
-
 app.post("/sentenceLength", (req, res) => {
-  console.log(req.params);
   axios
     .request({
       baseURL: endpoint,
@@ -194,7 +190,7 @@ app.post("/sentenceLength", (req, res) => {
  *         example: shark
  *       from:
  *         type: string
- *         example: es
+ *         example: en
  *       to:
  *         type: string
  *         example: de
