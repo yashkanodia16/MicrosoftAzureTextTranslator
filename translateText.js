@@ -13,6 +13,7 @@ app.use(bodyparser.json());
 var subscriptionKey = process.env.API_KEY;
 var endpoint = "https://api.cognitive.microsofttranslator.com/";
 var location = "global";
+const port = 3000;
 
 //swagger Definition
 const def = {
