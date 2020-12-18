@@ -27,7 +27,7 @@ const def = {
         name: "Yash Kanodia",
       },
     },
-    host: "134.122.16.20" + port,
+    host: "134.122.16.20:" + port,
     basePath: "/",
   },
   apis: ["./translateText.js"],
@@ -44,12 +44,18 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(specs));
  *     properties:
  *       text:
  *         type: string
+ *         example: Hello UNCC!!
  *       from:
  *         type: string
+ *         example: en
  *       to:
- *         type: string
+ *         type: array
+ *         items:
+ *          type: string
+ *          example: es
  *       api_version:
  *         type: string
+ *         example: '3.0'
  */
 /**
  * @swagger
@@ -63,6 +69,8 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(specs));
  *              description: Data Translated
  *          500:
  *              description: Error
+ *          400:
+ *              description: Bad Request
  *      parameters:
  *          - name: Translation
  *            description: Translation Object
@@ -97,9 +105,14 @@ app.post("/translateText", (req, res) => {
       ],
       responseType: "json",
     })
-    .then(function (response) {
-      res.send(response.data);
-    });
+    .then(
+      function (response) {
+        res.status(200).send(response.data);
+      },
+      (error) => {
+        res.status(400).send(error);
+      }
+    );
 });
 
 /**
@@ -109,8 +122,10 @@ app.post("/translateText", (req, res) => {
  *     properties:
  *       text:
  *         type: string
+ *         example: Hello!
  *       api_version:
  *         type: string
+ *         example: '3.0'
  */
 /**
  * @swagger
@@ -124,6 +139,8 @@ app.post("/translateText", (req, res) => {
  *              description: Provided length of sentence without translation
  *          500:
  *              description: Error
+ *          400:
+ *              description: Bad request
  *      parameters:
  *          - name: sentenceLength
  *            description: sentence length object
@@ -157,9 +174,14 @@ app.post("/sentenceLength", (req, res) => {
       ],
       responseType: "json",
     })
-    .then(function (response) {
-      res.send(response.data);
-    });
+    .then(
+      function (response) {
+        res.status(200).send(response.data);
+      },
+      (error) => {
+        res.status(400).send(error);
+      }
+    );
 });
 
 /**
@@ -169,12 +191,16 @@ app.post("/sentenceLength", (req, res) => {
  *      properties:
  *       text:
  *         type: string
+ *         example: shark
  *       from:
  *         type: string
+ *         example: es
  *       to:
  *         type: string
+ *         example: de
  *       api_version:
  *         type: string
+ *         example: '3.0'
  */
 /**
  * @swagger
@@ -188,6 +214,8 @@ app.post("/sentenceLength", (req, res) => {
  *              description: Dictionary Lookedup with alternate translations
  *          500:
  *              description: Error
+ *          400:
+ *              description: Bad request
  *      parameters:
  *          - name: dictionaryLookup
  *            description: Dictionary Lookup object
@@ -218,9 +246,14 @@ app.post("/dictionary", (req, res) => {
       },
     ],
     responseType: "json",
-  }).then(function (response) {
-    res.send(response.data);
-  });
+  }).then(
+    function (response) {
+      res.status(200).send(response.data);
+    },
+    (error) => {
+      res.status(400).send(error);
+    }
+  );
 });
 
 app.listen(port, () => {
