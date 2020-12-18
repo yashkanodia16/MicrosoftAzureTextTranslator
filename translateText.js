@@ -27,7 +27,7 @@ const def = {
         name: "Yash Kanodia",
       },
     },
-    host: "localhost:" + port,
+    host: "165.227.204.70:" + port,
     basePath: "/",
   },
   apis: ["./translateText.js"],
