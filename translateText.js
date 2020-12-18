@@ -26,7 +26,7 @@ const def = {
         name: "Yash Kanodia",
       },
     },
-    host: "localhost:3000",
+    host: "134.122.16.20" + port,
     basePath: "/",
   },
   apis: ["./translateText.js"],
@@ -222,6 +222,6 @@ app.post("/dictionary", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log(`Listening at http://localhost:3000`);
+app.listen(port, () => {
+  console.log(`Listening at http://http://134.122.16.20:${port}`);
 });
